@@ -1,0 +1,298 @@
+\documentclass{mynote}
+\title{Homework4}
+\author{2020051001214}
+\date\today
+
+\begin{document}
+\maketitle
+
+
+
+
+\begin{exercise}{3.3}
+    无穷长线电流$I$沿$z$轴流动，$z<0$的区域磁导率为$\mu$，$z>0$的空间磁导率为$\mu_0$，求磁感应强度$\bm{B}$，求磁化电流分布。
+\end{exercise}
+\begin{solution}
+设$z>0$区域的失势为$\bm{A}_1$，$z<0$为$\bm{A}_2$，在挖去线电流的空间中有方程组
+\[
+\left\{
+    \begin{aligned}
+        & \nabla^2 \bm{A}_1 = 0\\
+        & \nabla^2 \bm{A}_2 = 0 \\
+        & \hbm{e}_n \cdot (\bm{B}_2 - \bm{B}_1) |_{z=0}= 0 \\
+        & \hbm{e}_n \times (\dfrac{1}{\mu} \bm{B}_2 - \dfrac{1}{\mu_0} \bm{B}_2) |_{z=0} = \bm{a}_M
+    \end{aligned} 
+\right.    
+\]
+在柱坐标下考察方程$ \nabla^2 \bm{A}_1 = 0$，由于对称性$\bm{A}_1$只与$R$有关，即$\dfrac{1}{R} \pp{}{R} \left( R \pp{A_1^{i}}{R} \right) = 0$，简写为$R^2(A_1^{i})'' + R(A_1^{i}) ' = 0 $，此为欧拉方程，（令$R = e^t$）解得$A_1^i = a_1^i \ln R + b_1^i$，所以$\bm{A}_1 = \bm{a}_1 \ln R + \bm{b}_1,\; \bm{A}_2 = \bm{a}_2 \ln R + \bm{b}_2$。
+\[
+\bm{B}_1 = \nabla \times (\ln R \bm{a}_1) = \dfrac{1}{R} \left| \begin{matrix}
+    \hbm{e}_R & R\hbm{e}_{\phi} & \hbm{e}_z \\
+    \partial_R & \partial_{\phi} & \partial_{z} \\
+    a_1^R \ln R &R a_1^{\phi} \ln R & a_1^z \ln R
+\end{matrix} \right|    = \frac{-a_1^{z}}{R} \hbm{e}_{\phi} + a_1^{\phi} \left( \frac{\ln R}{R} + \frac{1}{R} \right) \hbm{e}_z
+\]
+根据常识可知这种情况下$\bm{B}_1$没有$z$方向分量，所以$a_1^{\phi} = 0$，此时可以满足约束条件$\hbm{e}_n \cdot (\bm{B}_2 - \bm{B}_1) = 0$。另一方面，用$\bm{B}$沿与$z$垂直，圆心在$z$上且半径为$R$的取线上积分，得$\displaystyle\oint_{r=R} \frac{-a_1^{z}}{R} \hbm{e}_{\phi} \cdot \dl \bm{l} = \mu_0 I$，解出$a_1^z = -\dfrac{\mu_0 I}{2 \pi}$，最终得到$\bm{B}_1 = \dfrac{\mu_0 I}{2 \pi R} \hbm{e}_{\phi},\; \bm{B}_2 = \dfrac{\mu I}{2 \pi R} \hbm{e}_{\phi}$.
+
+
+介质分界面处满足$\hbm{e}_n \times (\dfrac{1}{\mu} \bm{B}_2 - \dfrac{1}{\mu_0} \bm{B}_1) = \bm{a}_M = 0$
+
+磁化电流密度满足$\bm{J}_M = \nabla \times \bm{M}$，而$\bm{M} = \dfrac{\bm{B}}{\mu_0} - \dfrac{\bm{B}}{\mu}$，所以$\bm{J}_1 = 0$
+\[
+\bm{J}_2 = \left( \frac{1}{\mu_0} - \frac{1}{\mu} \right) \nabla \times \bm{B}_2 = \left( \frac{1}{\mu} - \frac{1}{\mu_0} \right)\frac{\mu I}{2\pi R^3} \hbm{e}_z    
+\]
+
+\end{solution}
+
+
+
+
+
+
+
+
+\begin{exercise}{3.4}
+    $x<0$处磁导率为$\mu$，$x>0$处为$\mu_0$，电流和上问一样，求磁感应强度和磁化电流强度。
+\end{exercise}
+\begin{solution}
+\[
+    \left\{
+        \begin{aligned}
+            & \nabla^2 \bm{A}_1 = 0\\
+            & \nabla^2 \bm{A}_2 = 0 \\
+            & \hbm{e}_n \cdot (\bm{B}_2 - \bm{B}_1) |_{\phi = 0,\; \pi}= 0 \\
+            & \hbm{e}_n \times (\dfrac{1}{\mu}_0 \bm{B}_2 - \dfrac{1}{\mu} \bm{B}_1) |_{\phi = 0,\; \pi}=\bm{a}_M
+        \end{aligned} 
+    \right.    
+ \]
+ $\bm{A}$与$z$无关，所以不妨直接让$\bm{r}$在$x-y$平面上。在已知空间电流分布时可用$\bm{A}  = \dfrac{\mu}{4 \pi} \displaystyle\int_{\mathcal{V}} \dfrac{\bm{J} \dl \tau '}{\imath}$求解。此题中$\bm{J}$仅在$z$轴上有效，因此
+ \[
+ \bm{A} = \frac{\mu}{4\pi} \int_{\mathcal{P}} \int_{\mathcal{S}} \dfrac{\bm{J} \dl \bm{a}' \cdot \dl \bm{l}'}{\imath} = \frac{\mu}{4\pi} \int_{-\infty}^{\infty} \frac{I \dl z'}{\sqrt{R^2 + z'^2}} \hbm{e}_z \Rightarrow \bm{A} = \frac{\mu I}{4 \pi} \ln \frac{1}{R} \hbm{e}_z
+ \]
+ 由$\nabla \times \bm{A} = \bm{B}$求出$\bm{B}_1 = \dfrac{\mu I}{4 \pi R} \hbm{e}_{\phi},\; \bm{B}_2 = \dfrac{\mu_0 I}{4 \pi R} \hbm{e}_{\phi}$。此结果满足约束条件$\hbm{e}_n \cdot (\bm{B}_2 - \bm{B}_1) |_{\phi = 0,\; \pi}= 0$，并且可求出介质分界面处$\bm{a}_M = 0$。
+
+同上一问一样有$\bm{J}_1 =  \left( \dfrac{1}{\mu} - \dfrac{1}{\mu_0} \right)\dfrac{\mu I}{2\pi R^3} \hbm{e}_z ,\; \bm{J}_2 = 0$.
+
+\end{solution}
+
+
+
+
+
+\begin{exercise}{3.7}
+    半径为$a$的无限长圆柱导体上有恒定电流$\bm{J}$，解失势的微分方程，设导体磁导率为$\mu$，导体外磁导率为$\mu_0$。
+\end{exercise}
+\begin{solution}
+设导体内失势为$\bm{A}_1$，导体外为$\bm{A}_2$，满足方程
+\[
+\left\{
+    \begin{aligned}
+        & \nabla^2 \bm{A}_1 = -\mu \bm{J} \\
+        & \nabla^2 \bm{A}_2 = 0 \\
+        % & \bm{A}_1 |_{R=0} < \infty
+        % & \bm{A}_2 |_{R \to \infty} < \infty
+    \end{aligned} 
+\right.    
+\]    
+矢量场$\bm{J}$在圆柱内任何点处的矢量都只有$z$分量，因此上述方程组归结为一下两种方程$\nabla^2 A = -\mu J,\; \nabla^2 A = 0$。首先求解第二个，$\bm{A}$与$z,\phi$无关，所以其分量也只与$R$有关。从而有
+\[
+\frac{1}{R} \pp{}{R} \left( R \pp{A}{R} \right) = 0   
+\]
+也即$R^2 A '' _{RR} + R A '_{R} = 0$，令$R = e^t$，则$t = \ln R$，因此方程化为$、\tilde{A}''_{tt} = 0$，解得$\tilde{A} = at + b \Leftrightarrow A= a\ln R + b$。对于方程
+\[
+    \frac{1}{R} \pp{}{R} \left( R \pp{A}{R} \right) = -\mu J
+\]
+按照同样方法化为$\tilde{A}''_{tt} = -\mu J e^{2t}$，通解已经求出，特解为$ce^{2t}$，将$\tilde{A} = at + b + ce^{2t}$带回方程，求出$c=-\dfrac{\mu J}{4}$，所以$A = a\ln R + b -\dfrac{\mu J}{4} R^2$
+
+\end{solution}
+
+
+
+
+
+
+
+
+\begin{exercise}{3.9}
+    将一磁导率$\mu$，半径为$R_0$的球体放入均匀磁场$\bm{H}_0$内，求总磁感应强度$\bm{B}$和诱导磁矩$\bm{m}$。
+\end{exercise}
+\begin{solution}
+以$z$方向为极轴，建立球坐标系。假设$\bm{H}_0$的方向为$z$方向。设球体内的标势为$u_1$，球体外为$u_2$，满足
+\[
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_1 = 0 \\
+            & \nabla^2 u_2 = 0 \\
+            & u_1|_{R_0} = u_2|_{R_0} \\
+            & \mu \pp{u_2}{R} - \mu_0 \pp{u_1}{R} = 0\\
+            & \lim_{R\to 0} u_1 < \infty 
+        \end{aligned} 
+    \right.
+\]
+在均匀磁场强度中，任选一点为原点，假设此处磁标势为$u_0$，则有$\lim\limits_{R \to \infty}u_2 - u_0 = -\bm{r} \cdot \bm{H}_0$，得到$\lim\limits_{R \to \infty}u_2 = u_0 - R H_0 \cos \theta$，此为另一约束条件。
+
+在轴对称的情况下可以套用通解公式，得出
+\begin{gather*}
+    u_1 = \sum_{n=0} \left( a_n R^n + \frac{b_n}{R^{n+1}} \right) P_n (\cos \theta) \\
+    u_2 = \sum_{n=0} \left( c_n R^n + \frac{d_n}{R^{n+1}} \right) P_n (\cos \theta)
+\end{gather*}
+带入最后两个约束条件，有
+\[
+\left\{
+    \begin{aligned}
+        & u_1 = a_0 + a_1 R P_1(\cos \theta) + \sum_{n=2} a_n R^n P_n (\cos \theta) \\
+        & u_2 = u_0 + \frac{d_0}{R} + (-H_0 R + \frac{d_1}{R^2}) P_1(\cos \theta) + \sum_{n=2} \frac{d_n}{R^{n+1}}P_n(\cos \theta)
+    \end{aligned}
+\right.    
+\]
+考虑正交性，有$a_n = d_n = 0\;(n \geq 2)$，再带入剩下的约束条件，可的方程组
+\[
+\left\{
+    \begin{aligned}
+        & a_0 = u_0 + \frac{d_0}{R_0} \\
+        & a_1 R_0 = -H_0 R_0 + \frac{d_1}{R_0^2} \\
+        & a_1 \mu_0 = -\mu H_0 - \frac{2\mu d_1}{R_0^3} \\
+        & d_0 = 0
+    \end{aligned} 
+\right.    
+\]
+解得
+\[
+\left\{
+    \begin{aligned}
+        & a_0 = u_0 \\
+        & a_1 = \frac{3\mu H_0}{2\mu + \mu_0} \\
+        & d_0 = 0 \\
+        & d_1 = \frac{3\mu H_0 R_0^3}{2\mu + \mu_0} + H_0 R_0^3
+    \end{aligned} 
+\right.    
+\]
+因此有
+\begin{gather*}
+    u_1 = u_0 + \frac{3\mu H_0}{2\mu + \mu_0} R \cos \theta \\
+    u_2 = u_0 -H_0 R \cos \theta + (\frac{3\mu H_0 R_0^3}{2\mu + \mu_0} + H_0 R_0^3) \frac{1}{R^2} \cos \theta
+\end{gather*}
+由$\bm{B} = -\dfrac{1}{\mu} \nabla u$，(这里$\nabla = \hbm{e}_r \pp{}{R} + \hbm{e}_{\theta} \dfrac{1}{R} \pp{}{\theta} + \hbm{e}_{\phi} \dfrac{1}{R\sin \theta} \pp{}{\phi}$)求出
+\begin{gather*}
+    \bm{B}_1 = \frac{3 H_0}{2\mu + \mu_0} \left( \sin \theta \hbm{e}_{\theta} - \cos \theta \hbm{e}_{r} \right) \\
+    \bm{B}_2 = \left[ -H_0 \cos \theta + (\frac{3\mu H_0 R_0^3}{2\mu + \mu_0} + H_0 R_0^3) \cos \theta \frac{-2}{R^3} \right] \hbm{e}_r + \left[ H_0 R \sin \theta - (\frac{3\mu H_0 R_0^3}{2\mu + \mu_0} + H_0 R_0^3)\frac{1}{R^2} \sin \theta \right] \hbm{e}_{\theta}
+\end{gather*}
+
+
+磁偶极矩形成的磁场形如$\bm{B}_m  = -\dfrac{\mu_0}{4\pi} (\bm{m} \cdot \nabla) \dfrac{\bm{R}}{R^3}$,,,,,,\textcolor{red}{(?)}
+
+\end{solution}
+
+
+
+
+
+
+
+
+\begin{exercise}{3.10}
+    内外半径为$R_1,\; R_2$的空心球，位于均匀外磁场$\bm{H}_0$内，球的磁导率为$\mu$，求空腔内的场$\bm{B}$，讨论$\mu \gg \mu_0$的屏蔽效果。
+\end{exercise}
+\begin{solution}
+设标势由内到外分别为$u_1,\; u_2,\; u_3$，满足如下方程
+\[
+\left\{
+    \begin{aligned}
+        & \nabla ^2 u_1 = 0 \\
+        & \nabla ^2 u_2 = 0 \\
+        & \nabla ^2 u_3 = 0 \\
+        & u_1|_{R_1} = u_2|{R_1} \\
+        & u_2|_{R_2} = u_3|_{R_2} \\
+        & \left. \mu_0 \pp{u_1}{R} \right|_{R_1} = \left. \mu \pp{u_2}{R} \right|_{R_1} \\
+        & \left. \mu \pp{u_2}{R} \right|_{R_2} = \left. \mu_0 \pp{u_3}{R} \right|_{R_2} \\
+        & u_1(0) < \infty \\
+        & \lim_{R \to \infty} u_3 = u_0 - RH_0 \cos \theta
+    \end{aligned} 
+\right.    
+\]
+得通解
+\begin{gather*}
+    u_1 = a_0 + a_1 R \cos \theta + \sum_{n=2} a_n R^n P_n(\cos \theta) \\
+    u_2 = b_0 + \frac{c_0}{R} + (b_1 R + \frac{c_1}{R^2})P_1(\cos \theta) + \sum_{n=2} (b_nR^n + \frac{c_n}{R^{n+1}}) P_n(\cos \theta) \\
+    u_3 = d_0 + \frac{e_0}{R} + (d_1 R + \frac{e_1}{R^2})P_1(\cos \theta) + \sum_{n=2} (d_nR^n + \frac{e_n}{R^{n+1}}) P_n(\cos \theta) 
+\end{gather*}
+带入约束条件后可得
+\[
+\left\{
+    \begin{aligned}
+        & a_0 = b_0 \\
+        & c_0 = 0 \\
+        & a_1 R_1 = b_1 R_1 + \frac{c_1}{R_1^2} \\
+        & c_n = 0 \\
+        & b_n = a_n
+    \end{aligned} 
+\right.
+\quad\left\{
+    \begin{aligned}
+        & b_0 = -u_0 \\
+        & c_0 = e_0 \\
+        & b_1 R_2 + \frac{c_1}{R_2^2} = -H_0 R_2 + \frac{e_1}{R_2^2} \\
+        & d_n = 0\\
+        & b_n = e_n = 0
+    \end{aligned} 
+\right. 
+\quad
+\left\{
+    \begin{aligned}
+        & c_0 = e_0 = 0\\
+        & \mu_0 a_1 = \mu (b_1 - \frac{2c_1}{R_1^3}) \\
+        & \mu (b_1 - \frac{2c_1}{R_2^3}) = \mu_0 (-H_0 - \frac{2e_1}{R_2^3})
+    \end{aligned} 
+\right. 
+\]
+化为线性方程组
+\[
+\begin{bmatrix}
+    \mu_0 & -\mu & \dfrac{2\mu}{R_1^3} & 0 \\
+    0 & \mu & -\dfrac{2\mu}{R_2^3} & \dfrac{2\mu_0}{R_2^3} \\
+    R_1 & -R_1 & -\dfrac{1}{R_1^2} & 0 \\
+    0 & R_2 & \dfrac{1}{R_2^2} & \dfrac{1}{R_2^2} 
+\end{bmatrix}    
+\begin{bmatrix}
+    a_1 \\ b_1 \\ c_1 \\ e_1 
+\end{bmatrix}
++ \begin{bmatrix}
+    0 \\ \mu_0 H_0 \\ 0 \\ R_2 H_0 
+\end{bmatrix}
+ = 0
+\]
+由克拉默法则$x_i = \dfrac{\det \bm{A}_i (\bm{b})}{\det \bm{A}}$可以求出相应的解。这里只考察空腔内的场。$\bm{B}_1 = -\mu_0 \nabla u_1 = -\mu_0 a_1 (\cos \theta \hbm{e}_r - \sin \theta \hbm{e}_{\theta})$，所以只需要考察$a_1$的情况。将$\bm{A},\; \tilde{\bm{A}} = \bm{A}_1(\bm{b})$沿第二列展开，即$\bm{A} = -\mu A_{21} + \mu A_{22} - R_1 A_{23} + R_2 A_{44}$，可以验证代数余子式$A_{21},\;A_{22},\;A_{23},\; A_{24}$均是$\mu$的一次式，故$\det \bm{A}$是$\mu$的二次多项式$\mlP_2(\mu)$，同理$\det \tilde{\bm{A}} = \tilde{\mlP}_2(\mu)$，从而有
+\[
+\lim_{\mu \to \infty} \frac{\mlP_2(\mu)}{\tilde{\mlP}_2(\mu)} = \Const    
+\]
+所以说$\mu \gg \mu_0$时空腔中的$\bm{B}$恒为常数。
+
+
+
+
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

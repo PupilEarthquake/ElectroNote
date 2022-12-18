@@ -1,0 +1,427 @@
+\documentclass{mynote}
+
+\title{Exercise2}
+\author{202005100214}
+\date\today
+
+\newcommand{\lP}{\mathrm{P}}
+% \usepackage{color}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{exercise}{例三}
+    半径为$R_0$的接地导体球置于均匀外电场$\bm{E}_0$中，求电势和导体上的电荷面密度。
+\end{exercise}
+\begin{solution}
+    $r$是球坐标下坐标$(r, \theta, \phi)$的分量。定义球面内势场$u_1$，球面外势场$u_2$。其$u_1$只在球面内有定义，$u_2$只在球面外有定义，两者不能直接叠加。它们分别满足
+    \[
+    \left\{
+        \begin{aligned}
+            & \nabla ^2 u_1 = 0 \\
+            & u_1 |_{r=R_0} = 0 \\
+            & u_1(0) < \infty
+        \end{aligned} 
+    \right.    
+    ,\quad 
+    \left\{
+        \begin{aligned}
+            & \nabla ^2 u_2 = 0 \\
+            & u_2|_{r=R_0} = 0 \\
+            & \lim_{r\to \infty} u_2 = u_0 - E_0 r P_1(\cos \theta)
+        \end{aligned} 
+    \right.
+    \]
+    根据方位角无关的通解公式得到$u_1 = \displaystyle\sum_{n=0}a_nr^nP_n(\cos \theta),\; u_2 = u_0 + \dfrac{b_0}{r} - E_0 r \cos \theta + \dfrac{b_1}{r^2} \cos \theta + \displaystyle\sum_{n=2} \dfrac{b_n}{r^{n+1}}P_n(\cos \theta)$，根据边界条件列出方程
+    \begin{align*}
+        & \sum_{n=0}a_n R_0^n P_n(\cos \theta) = 0 \\
+        & u_0 + \dfrac{b_0}{R_0} - E_0 R_0 \cos \theta + \dfrac{b_1}{R_0^2} \cos \theta + \sum_{n=2} \dfrac{b_n}{R_0^{n+1}}P_n(\cos \theta) = 0
+    \end{align*}
+    \textbf{由于基底$P_l(x)$的正交性}，$\sum_{n=0}a_n R_0^n P_n(\cos \theta) = 0$唯一的情况是$a_n = 0$，则$u_1 = 0$。同时还要求函数在基底$P_n(x)$上的展开系数唯一，即
+    \[
+    \left\{
+        \begin{aligned}
+            & u_0 + \dfrac{b_0}{R_0} = 0 \\
+            & - E_0 R_0 \cos \theta + \dfrac{b_1}{R_0^2} \cos \theta = 0 \\
+            & b_n = 0 \; (n\geq 2)
+        \end{aligned} 
+    \right.    
+    \]
+    所以
+    \[
+    u_2 = u_0 - \dfrac{R_0 u_0}{r} - E_0 r \cos \theta + \dfrac{E_0 R_0^3}{r^2} \cos \theta    
+    \]
+    如果取$u_0=0$，得到$u_2 = - E_0 r \cos \theta + \dfrac{E_0 R_0^3}{r^2} \cos \theta$。
+
+    球坐标系下的梯度算符为$\nabla = \pp{}{r} \hbm{e}_r + \dfrac{1}{r}\pp{}{\theta} \hbm{e}_{\theta} + \dfrac{1}{r\sin \theta} \pp{}{\phi} \hbm{e}_{\phi}$，球面上$\e_n$大小与方向和$\hbm{e}_r$一致，所以$\pp{u}{n} = \nabla u \cdot \e_n = \pp{u}{r}$.
+    带入导体的边界条件$\varepsilon_0 \left. \pp{u}{n} \right|_{r=R_0} = -\sigma$，可以求得约束电荷面密度
+    \[
+        \sigma = 3 \varepsilon_0 E_0 \cos \theta
+    \]
+\end{solution}
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.1}
+    一个半径为$R$的电介质球，极化强度为$\bm{P} = K \dfrac{\bm{r}}{r^2}$，电容率为$\varepsilon$ \\
+    (1)计算束缚电荷体密度和面密度 \\
+    (2)计算自由电荷体密度\\
+    (3)计算球外和球内电势\\
+    (4)求该电介质求的静电场的总能量
+\end{exercise}
+\begin{solution}
+(1)极化强度满足$\nabla \cdot \bm{P} = - \rho_P $，所以
+\[
+\rho_P = \nabla \cdot K \frac{\bm{r}}{r^2} = -K \frac{{\delta^{\mu}}_{\mu} r^2 - 2r^{\mu}r_{\mu}}{r^4} = -K \frac{1}{r^2}    
+\]
+球面上取一易拉罐，满足$\e_n \cdot (\bm{P}_2 - \bm{P}_1) = -\sigma_P$，但$\bm{P}_2 = 0$，所以$\sigma_p = P_1 = K \dfrac{1}{R}$
+
+(2)考虑$\bm{D} = \varepsilon_0 + K \dfrac{\bm{r}}{r^2}$以及$\bm{D} = \varepsilon \bm{E}$，得$\bm{D} = \dfrac{\varepsilon K}{\varepsilon - \varepsilon_0} \dfrac{\bm{r}}{r^2}$，由麦克斯韦方程组$\nabla \cdot \bm{D} = \rho$可得
+\[
+\rho = \dfrac{\varepsilon K}{\varepsilon - \varepsilon_0}  \nabla \cdot \dfrac{\bm{r}}{r^2} = \dfrac{\varepsilon K}{\varepsilon - \varepsilon_0} \frac{1}{r^2}
+\]
+
+(3)总的电荷量为
+\[
+Q = \int_{\mlV} \rho(\bm{r}) \dl \tau = \dfrac{\varepsilon K}{\varepsilon - \varepsilon_0} \int_{0}^{2 \pi} \int_{0}^{\pi} \int_{0}^{R} \frac{1}{r^2} r^2 \sin \theta  \dl r \dl \theta \dl \phi = \frac{4\pi \varepsilon K R}{\varepsilon - \varepsilon_0}
+\]
+根据高斯定理，球面外的电场满足$E_o(r) 4 \pi r^2 = \dfrac{4\pi \varepsilon K R}{\varepsilon_0 (\varepsilon - \varepsilon_0)}$，解得$E_o(r) = \dfrac{\varepsilon K R}{\varepsilon_0(\varepsilon - \varepsilon_0) r^2}$，从而
+\[
+u_o(r) = -\int_{\infty}^r \dfrac{\varepsilon K R}{\varepsilon_0(\varepsilon - \varepsilon_0) t^2} \dl t = \dfrac{\varepsilon K R}{\varepsilon_0(\varepsilon - \varepsilon_0) r}
+\]
+上问已经求得了球内电场$E_i(r) = \dfrac{\varepsilon K}{\varepsilon - \varepsilon_0} \dfrac{1}{r}$，因此球内电势为
+\begin{align*}
+    u_i(r) &= -\int_{\infty}^{r} E \dl t\\
+&= \int_{r}^{R} E_i(t) \dl t + \int_{R}^{\infty} E_o(t) \dl t \\
+&= \frac{K}{\varepsilon - \varepsilon_0} \left[ \ln \frac{R}{r} + \frac{\varepsilon}{\varepsilon_0} \right]
+\end{align*}
+
+(4) 
+\begin{align*}
+    W &= \frac{1}{2} \int_{\mlV} \rho(r) u_i(r) \dl r \\
+    &= \frac{\varepsilon K^2}{2(\varepsilon - \varepsilon_0)^2} \left[ \iiint_{\mlV} \ln \frac{R}{r} \sin \theta \dl r \dl \theta \dl \phi + \iiint_{\mlV} \frac{\varepsilon}{\varepsilon_0} \sin \theta \dl r \dl \theta \dl \phi  \right] \\
+    &= 2\pi \varepsilon R \frac{K^2}{(\varepsilon - \varepsilon_0)^2} \left( 1 + \frac{\varepsilon}{\varepsilon_0}\right)
+\end{align*}
+\end{solution}
+
+
+
+
+
+
+\begin{exercise}{2.2}
+    均匀外置电场放入半径为$R_0$的导体球，用分离变量法求解下述情况\\
+    (1)导体球接有电池，与地面保持电势差$\varPhi_0$ \\
+    (2)导体球带有电荷$Q$
+\end{exercise}
+\begin{solution}
+    (1)球面内定义电势场$u_1$，球面外定义电势场$u_2$。
+    两个标量场分别满足
+    \[
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_2(\bm{r}) = 0\\
+            & u_2 |_{r=R_0} = \varPhi_0 \\
+            & \lim_{r\to \infty} u_2 = u_0 - E_0 r \cos \theta
+        \end{aligned} 
+    \right. ,\quad
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_1(\bm{r}) = 0\\
+            & u_1 |_{r=R_0} = \varPhi_0 \\
+            & u_1(0) < \infty
+        \end{aligned} 
+    \right.   
+    \]
+    根据方位角无关的通解公式$u_1 = \displaystyle\sum_{n=0} \left( a_n r^n + \dfrac{b_n}{r^{n+1}} \right) \lP_n(\cos \theta),\; u_2 = \displaystyle\sum_{n=0} \left( c_n r^n + \dfrac{d_n}{r^{n+1}} \right) \lP_n(\cos \theta)$，列出必要条件：$a_0 = u_0,\; a_1 = -E_0,\; a_n = 0\, (n \geq 2),\; d_n = 0$；
+    \begin{align*}
+        & u_0 + \frac{b_0}{R_0} - E_0 R_0 \cos \theta + \frac{b_1}{R_0^2} \cos \theta + \sum_{n=2} \dfrac{b_n}{R_0^{n+1}} \lP_n(\cos \theta) = c_0 + c_1 R_0 \cos \theta + \sum_{n=2} c_n R_0^n \lP_n(\cos \theta) \\
+        & u_0 + \frac{b_0}{R_0} - E_0 R_0 \cos \theta + \frac{b_1}{R_0^2} \cos \theta + \sum_{n=2} \dfrac{b_n}{R_0^{n+1}} \lP_n(\cos \theta) = \varPhi_0
+    \end{align*}
+    解上述方程带有猜的成分，猜测$b_n = c_n = 0\; (n\geq 2)$，如果有解，则这个解就是唯一的解。
+    \[
+        u_0 + \frac{b_0}{R_0} - E_0 R_0 \cos \theta + \frac{b_1}{R_0^2} \cos \theta = \varPhi_0
+    \]
+    为了使上式左边与$\theta$无关，可以让$ - E_0 R_0 \cos \theta + \frac{b_1}{R_0^2} \cos \theta = 0$，得出如下方程组
+    \[
+    \left\{
+        \begin{aligned}
+            & E_0 R_0 \cos \theta = \frac{b_1}{R_0^2} \cos \theta \\
+            & u_0 + \frac{b_0}{R_0} = \varPhi_0 \\
+            & c_0 = u_0 + \frac{b_0}{R_0} \\
+            & c_1 = - E_0 R_0 \cos \theta + \frac{b_1}{R_0^2} \cos \theta
+        \end{aligned} 
+    \right.    
+    \]
+    发现有解，所以就有
+    \[
+    u_2(\bm{r}) = u_0 - E_0 r \cos \theta + \frac{R_0 (\varPhi_0 - u_0)}{r} + \frac{E_0 R_0^3}{r^2} \cos \theta
+    \]
+
+    (2)根据高斯定理得
+    \[
+    \oint_{\mlS} \bm{E} \cdot \dl \bm{a} = \frac{Q}{\varepsilon_0}    
+    \]
+    球面上得单位法向量$\e_n$与球坐标的基失$\hbm{e}_r$是一致的，所以
+    \[
+        \oint_{\mlS} \bm{E} \cdot \dl \bm{a} = -\oint_{\mlS} \nabla u \cdot \e_n \dl a = -\oint_{\mlS} \pp{u}{r} \dl a
+    \]
+    在球面上积分，得出边界条件之一$\left. \pp{u}{r} \right|_{r=R_0} = -\dfrac{Q}{4\pi \varepsilon_0 R_0^2}$.
+    两个标量场分别满足
+    \[
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_2(\bm{r}) = 0\\
+            & \left. \pp{u}{r} \right|_{r=R_0} =  -\dfrac{Q}{4\pi \varepsilon_0 R_0^2} \\
+            & \lim_{r\to \infty} u_2 = u_0 - E_0 r \cos \theta
+        \end{aligned} 
+    \right. ,\quad
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_1(\bm{r}) = 0\\
+            & u_1 |_{r=R_0} = u_2 |_{r = R_0} = \Const \\
+            & u_1(0) < \infty
+        \end{aligned} 
+    \right.   
+    \]
+    同样的方法解出$b_0 = \dfrac{Q}{4\pi \varepsilon_0},\; b_1 = \dfrac{E_0 R_0^3}{2}$
+    \[
+        u_2(\bm{r}) = u_0 - E_0 r \cos \theta + \dfrac{Q}{4\pi \varepsilon_0 r} + \dfrac{E_0 R_0^3}{2r^2} \cos \theta
+    \]
+\end{solution}
+
+
+
+
+
+
+\begin{exercise}{2.3}
+    均匀介质球的中心置一电荷$Q_f$，球的电容率为$\varepsilon$，球外为真空，用分离变量法球空间电势。
+\end{exercise}
+\begin{solution}
+    定义球面内势场$u_1$，球面外势场$u_2$。根据电介质分界面的边界条件列出方程组
+    \[
+        \left\{
+        \begin{aligned}
+            & \nabla^2 u_2 = 0 \\
+            & \lim_{r \to \infty} u_2 = 0
+        \end{aligned} 
+    \right.  
+     ,\quad 
+     \left\{
+        \begin{aligned}
+            & \nabla^2 u_1 = - \frac{Q_f\delta(r)}{\varepsilon} \\
+            & u_2|_{R_0} = u_1|_{R_0} \\
+            & \varepsilon_0 \left. \pp{u_2}{r} \right|_{R_0} = \varepsilon \left. \pp{u_1}{r} \right|_{R_0} \\
+        \end{aligned} 
+    \right.
+    \]
+    由于$u_2(\bm{r})$只与长度$r$有关，其通解为$u_2 = a + \dfrac{b}{r}$，根据条件还有$a = 0$。可见在球面上$u_2 = \dfrac{b}{R_0}$是一个常数。由此可以通过
+    \[
+        \left\{
+            \begin{aligned}
+                & \nabla^2 u_1 = - \frac{Q_f\delta(r)}{\varepsilon} \\
+                & u_1|_{R_0} = \Const
+            \end{aligned} 
+        \right.
+    \]
+    确定$u_1$的一族解$u_1 = \dfrac{Q_f}{4\pi \varepsilon r} + c$。通过$ \varepsilon_0 \left. \pp{u_2}{r} \right|_{R_0} = \varepsilon \left. \pp{u_1}{r} \right|_{R_0}$求得$b = \dfrac{Q_f}{4\pi \varepsilon_0}$，通过$u_2|_{R_0} = u_1|_{R_0}$求出$c = \dfrac{Q_f}{4\pi \varepsilon_0 R_0} - \dfrac{Q_f}{4\pi \varepsilon R_0}$。最终得到
+    \begin{align*}
+        & u_1 = \dfrac{Q_f}{4\pi \varepsilon r} + \dfrac{Q_f}{4\pi \varepsilon_0 R_0} - \dfrac{Q_f}{4\pi \varepsilon R_0} \\
+        & u_2 = \dfrac{Q_f}{4\pi \varepsilon_0 r }
+    \end{align*}
+
+    % 还有一种等效法，定义在全域上由自由电荷$Q_f$生成的电势$u_f$，显然$u_f = \dfrac{Q_f}{4\pi \varepsilon r}$。定义介质球内极化产生的电势$u_p^i$
+\end{solution}
+
+
+
+
+
+
+
+\begin{exercise}{2.6}
+    均匀外电场$E_0$置入一均匀带自由电荷密度$\rho_f$的绝缘介质球，电容率为$\varepsilon$，求空间各点电势。
+\end{exercise}
+\textcolor{red}{外电场不会影响自由电荷分布吗？}
+\begin{solution}
+    假设外电场下自由电荷分布不变。设球内电势为$u_i + u'_i$，$u_i$是自由电荷产生的电势，$u'_i$是外电场激发的束缚电荷产生的电势；球外电势为$u_e$。分别满足
+    \[
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_i = -\dfrac{\rho_f}{\varepsilon} \\
+            & \nabla^2 u'_i = 0 \\
+            & [u_i + u'_i]_{r=0} < \infty
+        \end{aligned} 
+    \right. 
+    ,\quad 
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_e = 0 \\
+            & \lim_{r \to \infty} u_e = u_0 - E_0 r P_1(\cos \theta) \\
+            & u_e|_{R_0} = [u_i + u'_i ]_{R_0} \\
+            & \varepsilon \left. \pp{(u_i + u'_i)}{r} \right|_{R_0}= \left. \varepsilon_0 \pp{u_e}{r} \right|_{R_0}
+        \end{aligned} 
+    \right.
+    \]
+    $\nabla^2 u_i = -\dfrac{\rho_f}{\varepsilon}$已经包含了自身电场的极化，无需再考虑别的。而有外电场的情况下会有额外的极化，所以加上了$u'_i$这一项。
+    \[
+        \nabla^2 u_i = -\dfrac{\rho_f}{\varepsilon} \Rightarrow \nabla \cdot \nabla u_i = - \dfrac{\rho_f}{\varepsilon} \Rightarrow \oint_{\mlS} \pp{u_i}{r} \dl a = -\int_{\mlV} \dfrac{\rho_f}{\varepsilon} \dl \tau    
+    \]
+    解得$u_i = u_0 - \dfrac{\rho_f}{6\varepsilon} r^2$。目测可知
+    \[
+        u_2 = u_0 + \frac{b_0}{r} - E_0rP_1(\cos \theta) + \frac{b_1}{r^2}P_1(\cos \theta) + \sum_{n=2} \dfrac{b_n}{r^{n+1}} P_n(\cos \theta)
+    \] 
+    $u_i + u'_i$形如
+    \[
+        u_i + u'_i = u_0 - \dfrac{\rho_f}{6\varepsilon} r^2 + \sum_{n=0} c_n r^n P_n(\cos \theta)
+    \]
+    带入边界条件得
+    \begin{align*}
+        & u_0 + \frac{b_0}{R_0} - E_0 R_0 P_1(\cos \theta) + \frac{b_1}{R_0^2}P_1(\cos \theta) + \sum_{n=2} \dfrac{b_n}{R_0^{n+1}}  P_n(\cos \theta) \\
+        =& u_0 - \dfrac{\rho_f}{6\varepsilon} R_0^2 + c_0 + c_1R_0P_1(\cos \theta) + \sum_{n=2} c_n R_0^n P_n(\cos \theta)
+    \end{align*}
+    \begin{align*}
+        & \varepsilon \left[ -\frac{\rho_f R_0}{3 \varepsilon} + c_1 P_1(\cos \theta) +  \sum_{n=2} n c_n R_0^{n-1} P_n(\cos \theta)\right] \\
+        =& \varepsilon_0 \left[ -\frac{b_0}{R_0^2} - E_0 P_1 (\cos \theta)   - \frac{2b_1}{R_0^3} P_1(\cos \theta) + \sum_{n=2} \dfrac{-(n+1) b_n}{R_0^{n+2}}  P_n(\cos \theta) \right]
+    \end{align*}
+    列出方程组
+    \[
+    \left\{
+        \begin{aligned}
+            &  u_0 + \frac{b_0}{R_0} = u_0 - \dfrac{\rho_f}{6\varepsilon} R_0^2 + c_0  \\
+            & - E_0 R_0 + \frac{b_1}{R_0^2} = c_1R_0 \\
+            & -\frac{\rho_f R_0}{3} = -\frac{\varepsilon_0 b_0}{R_0^2} \\
+            & \varepsilon c_1 = \varepsilon_0 \left[ - E_0  - \frac{2b_1}{R_0^3}\right] \\
+            & \sum_{n=2} \dfrac{b_n}{R_0^{n+1}}  P_n(\cos \theta) = \sum_{n=2} c_n R_0^n P_n(\cos \theta) \\
+            & \varepsilon \sum_{n=2} n c_n R_0^{n-1} P_n(\cos \theta) = \varepsilon_0 \sum_{n=2} \dfrac{-(n+1) b_n}{R_0^{n+2}}  P_n(\cos \theta)
+        \end{aligned} 
+    \right.    
+    \]
+    解得$c_n = b_n = 0,\; (n \geq 2)$，
+    $b_0 = \dfrac{\rho_f R_0^3}{3 \varepsilon_0}$，
+    $c_0 = \dfrac{\rho_f R_0^2}{3 \varepsilon_0} + \dfrac{\rho_f R_0^2}{6 \varepsilon}$，
+    $b_1 = \dfrac{-3 E_0 \varepsilon_0 R_0^3}{\varepsilon + 2 \varepsilon_0} + E_0 R_0^3$，
+    $c_1 = \dfrac{-3E_0 \varepsilon_0}{\varepsilon + 2 \varepsilon_0}$。所以 
+    \begin{gather*}
+        u_1 = u_0 - \dfrac{\rho_f}{6\varepsilon} r^2 +  \dfrac{\rho_f R_0^2}{3 \varepsilon_0} + \dfrac{\rho_f R_0^2}{6 \varepsilon} + \dfrac{-3E_0 \varepsilon_0}{\varepsilon + 2 \varepsilon_0} r \cos \theta \\
+        u_2 = u_0 + \frac{\rho_f R_0^3 }{3 \varepsilon_0 r} - E_0r \cos \theta + \left(  \dfrac{-3 E_0 \varepsilon_0 R_0^3}{\varepsilon + 2 \varepsilon_0} + E_0 R_0^3 \right)\frac{1}{r^2} \cos \theta
+    \end{gather*}
+\end{solution}
+
+
+
+
+
+
+
+\begin{exercise}{2.9}
+    接地空心导体球内外半径分别为$R_1,\; R_2$，在离球心为$a$处置一电荷$Q$，用镜像法求电势，导体球上感应电荷有多少，分布在内表面还是外表面。
+\end{exercise}
+\begin{solution}
+    感应电荷集中于内表面，因此在等效时也应该以内表面为准。由相似关系得$R_1^2 = ab$，在$R_1$面上还应满足$\dfrac{Q}{4\pi \varepsilon_0 r_0} = \dfrac{q}{4\pi \varepsilon_0 r_1}$，得$q = \dfrac{r_1}{r_0} = \dfrac{R_1}{a}$，所以
+    \[
+    u(r) = \dfrac{Q}{4\pi \varepsilon_0 r_0} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 r_1}
+    \]
+    同时用余弦定理计算$r_0 = \sqrt{r^2 + a^2 - 2ra\cos \theta}$，$r_1 = \sqrt{r^2 + \dfrac{R_1^4}{a^2} - 2r\dfrac{R_1^2}{a} \cos \theta}$，故
+    \[
+    u(r) = \dfrac{Q}{4\pi \varepsilon_0 \sqrt{r^2 + a^2 - 2ra\cos \theta}} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 \sqrt{r^2 + \dfrac{R_1^4}{a^2} - 2r\dfrac{R_1^2}{a} \cos \theta}}
+    \]
+\end{solution}
+
+
+
+
+
+\begin{exercise}{2.10}
+    上题导体球壳不接地，而是带总电荷$Q_0$，或使其有总电荷$\varPhi_0$，求其电势。
+\end{exercise}
+\begin{solution}
+    设球壳内电势$u_1$，球壳外电势$u_2$，满足
+    \[
+    \left\{
+        \begin{aligned}
+            & \nabla ^2 u_2 = 0 \\
+            & \lim_{r \to \infty} u_2 = 0 \\
+            & \oint_{r=R_2} \pp{u_2}{r} \dl a = - \dfrac{Q + Q_0}{\varepsilon_0} 
+        \end{aligned} 
+    \right.    
+    ,\quad 
+    \left\{
+        \begin{aligned}
+            & \nabla^2 u_1 = - Q \dfrac{\delta(\bm{r} - \bm{a})}{\varepsilon_0} \\
+            & u_1 |_{R_1} = u_2|_{R_2} = \Const
+        \end{aligned} 
+    \right.
+    \]
+    可以直接解出$u_2 = \dfrac{Q + Q_0}{4\pi \varepsilon_0 r}$。$u_1$的解形如
+    \[
+    u_1 = \dfrac{Q}{4\pi \varepsilon_0 \sqrt{r^2 + a^2 - 2ra\cos \theta}} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 \sqrt{r^2 + \dfrac{R_1^4}{a^2} - 2r\dfrac{R_1^2}{a} \cos \theta}} + c
+    \]
+    带入边界条件$u_1 |_{R_1} = \dfrac{Q + Q_0}{4\pi \varepsilon_0 R_2}$，有
+    \begin{align*}
+        &\dfrac{Q}{4\pi \varepsilon_0 \sqrt{R_1^2 + a^2 - 2R_1a\cos \theta}} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 \sqrt{R_1^2 + \dfrac{R_1^4}{a^2} - 2R_1\dfrac{R_1^2}{a} \cos \theta}} + c = \dfrac{Q + Q_0}{4\pi \varepsilon_0 R_2}  \\
+        & \Rightarrow \dfrac{Q}{4\pi \varepsilon_0 \sqrt{R_1^2 + a^2 - 2R_1a\cos \theta}} - \dfrac{Q}{4\pi \varepsilon_0 \sqrt{R_1^2 + a^2 - 2R_1a\cos \theta}} + c = \dfrac{Q + Q_0}{4\pi \varepsilon_0 R_2} \\
+        & \Rightarrow c = \dfrac{Q + Q_0}{4\pi \varepsilon_0 R_2}
+    \end{align*}
+    所以
+    \[
+    u_1 =     \dfrac{Q}{4\pi \varepsilon_0 \sqrt{r^2 + a^2 - 2ra\cos \theta}} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 \sqrt{r^2 + \dfrac{R_1^4}{a^2} - 2r\dfrac{R_1^2}{a} \cos \theta}} + \dfrac{Q + Q_0}{4\pi \varepsilon_0 R_2}
+    \]
+
+    如果只给定导体的电势，也可以仿照上面的方法求出
+    \begin{align*}
+        & u_1 = \dfrac{Q}{4\pi \varepsilon_0 \sqrt{r^2 + a^2 - 2ra\cos \theta}} - \dfrac{QR_1}{a 4 \pi \varepsilon_0 \sqrt{r^2 + \dfrac{R_1^4}{a^2} - 2r\dfrac{R_1^2}{a} \cos \theta}} + \varPhi_0 \\
+        & u_2 = \dfrac{\varPhi_0 R_2}{r}
+    \end{align*}
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}{2.11}
+    接地导体平面有一半径为$a$的半凸部，半球球心在导体平面上，点电荷$Q$位于系统的对称轴上，与平面相距为$b$，求空间电势。
+\end{exercise}
+\begin{solution}
+    为使半球面上电势为$0$，可以等效为球面内有一未知电荷$q$。$q$在对称轴上，设其位置半径为$d$，应当满足$bd=a^2$，即$d = \dfrac{a^2}{b}$，其与电荷$Q$的势能叠加为$0$，即$\dfrac{q}{4\pi \varepsilon_0 r_a} + \dfrac{Q}{4\pi \varepsilon_0 r_b} = 0 \Rightarrow q = -\dfrac{r_a}{r_b} Q \Rightarrow q = -\dfrac{a}{b}Q$.此时平面的电势还不是$0$，由于上述的电荷结构对球面的电势没有影响，所以考虑在平面下方对称地放置两个电荷，位置分别为$-\dfrac{a^2}{b},\; -b$，电荷量分别为$\dfrac{a}{b}Q,\; -Q$。最终空间中某处的电势可以表示为
+    \begin{align*}
+        u(\bm{r}) = \dfrac{Q}{4\pi \varepsilon_0} \left( \dfrac{1}{\sqrt{x^2 + (y-b)^2}} - \dfrac{1}{\sqrt{x^2 + (y+b)^2}} \right) + \dfrac{q}{4\pi \varepsilon_0} \left( \dfrac{-1}{\sqrt{x^2 + (y-\frac{a^2}{b})^2}} + \dfrac{1}{\sqrt{x^2 + (y+\frac{a^2}{b})^2}} \right)
+    \end{align*}
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

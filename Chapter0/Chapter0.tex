@@ -1,0 +1,281 @@
+\documentclass{mynote}
+
+\begin{document}
+\section{矢量分析}
+\subsection{叉积公式}
+\begin{proposition}
+    \[
+    (u \times v)\cdot w = (w \times u)\cdot v
+    \]
+\end{proposition}
+\begin{proof}
+    $(u\times v) \cdot w = \sum\limits_{ijk}u^i v^j w^k \epsilon_{ijk}$，如果$i,j,k$是偶排列，$\epsilon_{ijk} = J$，如果是奇排列$\epsilon_{ijk} = -J$。比如
+    \[
+        (v\times u) \cdot w = \sum\limits_{ijk}v^i u^j w^k \epsilon_{ijk}  =  \sum\limits_{ijk}v^j u^i w^k \epsilon_{jik} = -\sum\limits_{ijk}v^j u^i w^k \epsilon_{ijk}
+    \]
+\end{proof}
+
+
+
+\begin{proposition}
+    \[
+    u \times (v \times w) = v (u \cdot w) - w(u \cdot v)    
+    \]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        (u \times (v \times w))_k &= (u \times (v \times w)) \cdot e_k \\
+        &= u^i (v \times w)^j (e_i \times e_j) \cdot e_k \\
+        &= u^i (v \times w)^j \epsilon_{ijk} \\
+        &= u^i v_p w_q \epsilon^{pqj} \epsilon_{ijk} \\
+        &= u^i v_p w_q (\delta^p_k \delta^q_i - \delta^p_i \delta^q_k) \\
+        &= u^i w_i v_k - u^i v_i w_k
+    \end{align*}
+    其中用到了一个常用结论
+    \[
+    \epsilon^{ijk}\epsilon_{pqr} = 
+    \left|
+        \begin{matrix}
+            \delta^i_p  & \delta^i_q & \delta^i_r \\
+            \delta^j_p & \delta^j_q & \delta^j_r \\
+            \delta^k_p & \delta^k_q & \delta^k_r
+        \end{matrix}
+    \right|
+    \]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\subsection{梯度相关}
+
+
+
+
+\begin{define}{导数算符}
+    \begin{gather*}
+        \nabla \cdot \bm{u} = \partial_{\mu} v^{\mu} \\
+        \nabla \times \bm{u} = \epsilon^{\mu \nu \rho} \partial_{\mu} u_{\nu} \e_{\rho} \\
+        (\nabla \times \bm{u})^{k} = \e^k (\epsilon^{\mu \nu \rho} \partial_{\mu} u_{\nu} \e_{\rho}) = \epsilon^{\mu \nu k} \partial_{\mu} u_{\nu}
+    \end{gather*}
+\end{define}
+
+
+
+
+\begin{proposition}
+    \[
+    \nabla \cdot (\bm{u} \times \bm{v}) = (\nabla \times \bm{u}) \cdot \bm{v} - (\nabla \times \bm{v}) \cdot \bm{u}
+    \]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \nabla \cdot (\bm{u} \times \bm{v}) & = \partial_i (\bm{u} \times \bm{v})^i \\
+        &= \partial_i ( \epsilon^{\mu \nu i} u_{\mu} v_{\nu} ) \\
+        &= \epsilon^{\mu \nu i} (\partial_i u_{\mu}) v_{\nu} + \epsilon^{\mu \nu i} u_{\mu} (\partial_i v_{\nu}) \\
+         &= \epsilon^{i \mu \nu } (\partial_i u_{\mu}) v_{\nu}  - \epsilon^{i \nu \mu } (\partial_i v_{\nu}) u_{\mu} \\
+         &=  (\nabla \times \bm{u}) \cdot \bm{v} - (\nabla \times \bm{v}) \cdot \bm{u}
+    \end{align*}
+\end{proof}
+
+
+
+
+
+
+
+\begin{proposition}
+    \[
+    \nabla \times (\bm{u} \times \bm{v}) =  (\bm{v} \cdot \nabla) \bm{u} - (\nabla \cdot \bm{u}) \bm{v} + (\nabla \cdot \bm{v}) \bm{u} - (\bm{u} \cdot \nabla )\bm{v}
+    \]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \nabla \times (\bm{u} \times \bm{v}) &= \epsilon^{ijk} \partial_i (\bm{u} \times \bm{v})_j \e_k \\
+        &= \epsilon^{ijk} \epsilon_{\mu \nu j} \partial_i (u^{\nu} v^{\nu}) \e_k \\
+        &= ({\delta^i}_{\nu}{\delta^k}_{\mu} - {\delta^i}_{\mu}{\delta^k}_{\nu})(\partial_iu^{\mu}) v^{\nu} \e_k +  ({\delta^i}_{\nu}{\delta^k}_{\mu} - {\delta^i}_{\mu}{\delta^k}_{\nu}) (\partial_i v^{\nu})u^{\mu} \e_k \\
+        &= (\partial_{\nu} u^{\mu}) v^{\nu} \e_{\mu} - (\partial_{\mu} u^{\mu}) v^{\nu} \e_{\nu} + (\partial_{\nu} v^{\nu}) u^{\mu} \e_{\mu} - (\partial_{\mu} v^{\nu}) u^{\mu} \e_{\nu} \\
+        &= v^{\nu} \partial_{\nu} u^{\mu} \e_{\mu} - (\partial_{\mu} u^{\mu}) v^{\nu} \e_{\nu} + (\partial_{\nu}v^{\nu})u^{\mu}\e_{\mu} - u^{\mu}\partial_{\mu} v^{\nu} \e_{\nu} \\
+        &= (\bm{v} \cdot \nabla) \bm{u} - (\nabla \cdot \bm{u}) \bm{v} + (\nabla \cdot \bm{v}) \bm{u} - (\bm{u} \cdot \nabla )\bm{v}
+    \end{align*}
+\end{proof}
+
+
+
+
+
+
+
+\begin{define}{散度}
+    对于一个vector function $v : \R^3 \to \R^3$.
+    \[
+        \textrm{Divergence} := \nabla \cdot v = \partial_x v^x + \partial_y v^y + \partial_z v^z
+    \]
+\end{define}
+
+
+\begin{define}{旋度}
+    同样对于一个vector function $v$.
+    \[
+    \textrm{Crul}:= \nabla \times v = 
+    \left|
+        \begin{matrix}
+            \e_x & \e_y & \e_z \\
+            \partial_x & \partial_y & \partial_z \\
+            v_x & v_y & v_z
+        \end{matrix}
+    \right|
+    \]
+\end{define}
+
+
+
+\begin{proposition}
+    梯度的旋度永远是零.
+    \[
+    \nabla \times (\nabla T) = 0    
+    \]
+\end{proposition}
+\begin{proof}
+    用行列式展开
+    \[
+    \nabla \times (\nabla T) = (\partial_{yz} - \partial_{zy})T\e_x -(\partial_{xz} - \partial_{zx})T\e_y + (\partial_{xy} - \partial_{yx})T\e_z = 0
+    \]
+\end{proof}
+
+
+
+\begin{proposition}
+    旋度的散度永远是零.
+    \[
+    \nabla \cdot (\nabla \times v) = 0    
+    \]
+\end{proposition}
+\begin{proof}
+    \[
+    \nabla\cdot (\nabla \times v) = \partial_x(\partial_y v^z - \partial_z v^y) - \partial_y(\partial_x v^z - \partial_z v^x) + \partial_z(\partial_x v^y - \partial_y v^x) = 0        
+    \]
+\end{proof}
+
+
+
+\subsection{积分}
+\begin{define}{线积分}
+    类似于变力沿曲线做功.
+    \[
+    \int_a^b \bm{v} \cdot \dl \bm{l}    
+    \]
+    其中$\bm{v}=v^x \e_x + v^y \e_y + v^z\e_z,\; \dl \bm{l} = \dl x \e_x + \dl y \e_y + \dl z \e_z$.
+\end{define}
+
+\begin{define}{通量}
+    需要注意$\dl \bm{a}$的方向是它的法线方向.
+    \[
+    \int_{\mathcal{S}} \bm{v} \cdot \dl \bm{a}
+    \]
+\end{define}
+
+
+\begin{define}{体积分}
+    $T$是一个标量场，在Cartesian coordinates下$\dl \tau  = \dl x \dl y \dl z$.
+    \[
+    \int_{\mathcal{V}} t \dl \tau    
+    \]
+\end{define}
+
+
+\begin{proposition}
+    梯度的积分:
+    \[
+    \int_a^b \nabla T \cdot \dl \bm{l} = T(b) - T(a)    
+    \]
+    具体原因目前不清楚，可以类比牛顿莱布尼兹公式:
+    \[
+    \int_a^b \pp{f}{x} \dl x = f(b) - f(a)    
+    \]
+\end{proposition}
+
+
+
+\begin{theorem}{高斯定理}
+    散度定理，格林公式，随便怎么叫。可以直观理解为体积散度的累加等于表面的通量。
+    \[
+    \int_{\mathcal{V}} \nabla \cdot \bm{v} \dl \tau = \oint_{\mathcal{S}} \bm{v} \c \cdot \dl \bm{a}    
+    \]
+    当体积足够小时，通量密度可定义为散度.
+    \[
+    \mathop{\mathrm{div}} \bm{v} = \lim_{\Delta V \to 0} \frac{\oint_{\mathcal{S}} \bm{v} \cdot \dl \bm{a}}{\Delta V}    
+    \]
+    实际上通过高等数学的近似计算可以得到
+    \[
+    \lim_{\Delta V \to 0} \frac{1}{\Delta V} \left[ \int_{\mathcal{S}_1} \bm{v} \e_x \dl y \dl z + \int_{\mathcal{S}_2} \bm{v}(-\e_x) \dl y \dl z\right] = \pp{\bm{v}^x}{x}
+    \]
+\end{theorem}
+
+
+\begin{theorem}{斯托克斯定理}
+    旋度定理。可以直观理解为面里旋度的累加等于边界的环量.
+    \[
+    \int_{\mathcal{S}} \nabla \times \bm{v} \dl \bm{a} = \oint_{\mathcal{P}} \bm{v} \cdot \dl \bm{l}     
+    \]
+    面积足够小时，环量密度可定义为旋度.
+    \[
+    \mathop{\mathrm{curl}} \bm{v} = \lim_{\Delta S \to 0} \frac{\oint_{\mathcal{P}} \bm{v} \cdot \dl \bm{l}}{\Delta S}
+    \]
+    可证明
+    \[
+        \mathop{\mathrm{curl}} \bm{v} =   \left( \pp{\bm{v}^y}{z} - \pp{\bm{v}^z}{y} \right) \e_x + \left( \pp{\bm{v}^z}{x} - \pp{\bm{v}^x}{z} \right) \e_y + \left( \pp{\bm{v}^y}{x} - \pp{\bm{v}^y}{x} \right) \e_z   
+    \]
+\end{theorem}
+
+
+\subsection{狄拉克函数}
+有一个非常特殊的向量函数:
+\[
+\bm{v} = \frac{1}{\vert r \vert^3} \bm{r}    
+\]
+其除了该点处以外散度是$0$，通量是$4 \pi$
+\begin{gather*}
+    \nabla \cdot \bm{v} = 0 \\
+    \oint \bm{v} \cdot \dl \bm{a} = \int \frac{1}{R^3} \bm{r} R \bm{r} \sin \theta \dl \theta \dl \phi = \int_{0}^{\pi} \sin \theta \dl \theta \int_{0}^{2\pi} \dl \phi = 4 \pi
+\end{gather*}
+可以看到高斯定理好像失效了，其实并没有，因为如果说
+\[
+\int \nabla \cdot \bm{v} \dl \tau = 0    
+\]
+其实是忽略了$r = 0$那一点的情况，此处的散度并没有定义，但普遍认为上述积分的结果正是由高斯定理推导得出的$4\pi$。
+
+
+
+\begin{define}{Delta 函数}
+    \[
+    \int_{-\infty}^{+\infty} \delta(x) \dl x = 1    
+    \]
+\end{define}
+
+
+\begin{proposition}
+    \[
+    \nabla \cdot \left( \frac{\bm{r}}{\vert r \vert^3} \right) = 4\pi \delta^3(x)    
+    \]
+\end{proposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
